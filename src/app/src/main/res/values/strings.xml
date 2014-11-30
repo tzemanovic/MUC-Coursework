@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">MUC Coursework</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="app_name">Dota 2 Informer</string>
+    <string name="news_title">NEWS</string>
     <string name="action_settings">Settings</string>
 
 </resources>
