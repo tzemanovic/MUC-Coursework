@@ -34,9 +34,9 @@ public class MainActivity extends ActionBarActivity {
 
     private LinearLayout newsFeed;
 
-    private final String NEWS_FEED_URL = "http://www.gosugamers.net/dota2/news/rss";
-    private final DateFormat RSS_DATE_FORMATTER_FROM_STRING = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss Z");
-    private final DateFormat RSS_DATE_FORMATTER_TO_STRING = new SimpleDateFormat("EEEE d MMMM yyyy HH:mm");
+    private final static String NEWS_FEED_URL = "http://www.gosugamers.net/dota2/news/rss";
+    private final static DateFormat RSS_DATE_FORMATTER_FROM_STRING = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss Z");
+    private final static DateFormat RSS_DATE_FORMATTER_TO_STRING = new SimpleDateFormat("EEEE d MMMM yyyy HH:mm");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +71,52 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private void showRssFeed(List<RSSItem> result) {
+        for (final RSSItem item : result) {
+            View rssItem = View.inflate(getApplicationContext(), R.layout.rss_item, null);
+
+            TextView title = (TextView) rssItem.findViewById(R.id.rssItemTitle);
+            title.setText(item.getTitle());
+            title.setTypeface(FontLoader.constantia(MainActivity.this));
+
+            TextView pubDate = (TextView) rssItem.findViewById(R.id.rssItemPubDate);
+            pubDate.setText(formatPubDate(item.getPubDate()));
+            pubDate.setTypeface(FontLoader.constantia(MainActivity.this));
+
+            String descriptionText = android.text.Html.fromHtml(item.getDescription()).toString()
+                    .replace("Click here to read the full article.", "").replace("\n", "");
+            TextView description = (TextView) rssItem.findViewById(R.id.rssItemDescription);
+            description.setText(descriptionText);
+            //description.setTypeface(FontLoader.constantia(MainActivity.this));
+
+            LinearLayout readMore = (LinearLayout) rssItem.findViewById(R.id.rssItemReadMore);
+            readMore.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(item.getLink()));
+                    startActivity(browserIntent);
+                }
+            });
+
+            newsFeed.addView(rssItem);
+        }
+        findViewById(R.id.newsLoading).setVisibility(View.GONE);
+    }
+
+    private static String formatPubDate(String pubDate) {
+        Date date = null;
+        try {
+            date = RSS_DATE_FORMATTER_FROM_STRING.parse(pubDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        if (date == null) {
+            return pubDate;
+        } else {
+            return RSS_DATE_FORMATTER_TO_STRING.format(date);
+        }
+    }
+
     private class AsyncRSSReader extends AsyncTask<String, Void, List<RSSItem>> {
 
         @Override
@@ -87,12 +133,9 @@ public class MainActivity extends ActionBarActivity {
             if (url != null) {
                 try {
                     feed = RSSReader.read(url);
-                } catch (IOException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
-                } catch (ParserConfigurationException e) {
-                    e.printStackTrace();
-                } catch (SAXException e) {
-                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), "Unable to obtain news data.", Toast.LENGTH_LONG);
                 }
             }
 
@@ -101,48 +144,7 @@ public class MainActivity extends ActionBarActivity {
 
         @Override
         protected void onPostExecute(List<RSSItem> result) {
-            for (final RSSItem item : result) {
-                View rssItem = View.inflate(getApplicationContext(), R.layout.rss_item, null);
-
-                TextView title = (TextView) rssItem.findViewById(R.id.rssItemTitle);
-                title.setText(item.getTitle());
-                title.setTypeface(FontLoader.constantia(MainActivity.this));
-
-                TextView pubDate = (TextView) rssItem.findViewById(R.id.rssItemPubDate);
-                pubDate.setText(formatPubDate(item.getPubDate()));
-                pubDate.setTypeface(FontLoader.constantia(MainActivity.this));
-
-                String descriptionText = android.text.Html.fromHtml(item.getDescription()).toString()
-                        .replace("Click here to read the full article.", "").replace("\n", "");
-                TextView description = (TextView) rssItem.findViewById(R.id.rssItemDescription);
-                description.setText(descriptionText);
-                //description.setTypeface(FontLoader.constantia(MainActivity.this));
-
-                LinearLayout readMore = (LinearLayout) rssItem.findViewById(R.id.rssItemReadMore);
-                readMore.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(item.getLink()));
-                        startActivity(browserIntent);
-                    }
-                });
-
-                newsFeed.addView(rssItem);
-            }
-        }
-
-        private String formatPubDate(String pubDate) {
-            Date date = null;
-            try {
-                date = RSS_DATE_FORMATTER_FROM_STRING.parse(pubDate);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-            if (date == null) {
-                return pubDate;
-            } else {
-                return RSS_DATE_FORMATTER_TO_STRING.format(date);
-            }
+            showRssFeed(result);
         }
     }
 

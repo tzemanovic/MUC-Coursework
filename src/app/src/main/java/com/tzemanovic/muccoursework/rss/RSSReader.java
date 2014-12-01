@@ -73,13 +73,6 @@ public class RSSReader {
                 } else if(qName.equals("description")) {
                     currentRSSItem.setDescription(currentStringBuilder.toString());
                 } else if(qName.equals("pubDate")) {
-                    // TODO: parse the date somewhere else
-                /*Date date = null;
-                try {
-                    date = formatter.parse(currentStringBuilder.toString());
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }*/
                     currentRSSItem.setPubDate(currentStringBuilder.toString());
                 } else if(qName.equals("link")) {
                     currentRSSItem.setLink(currentStringBuilder.toString());
