@@ -1,8 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
+        <item name="android:spinnerItemStyle">@style/spinnerItem</item>
+    </style>
+
+    <style name="spinnerItem" parent="android:Widget.TextView.SpinnerItem">
+        <item name="android:textAppearance">@style/spinnerItemTextColor</item>
+    </style>
+
+    <style name="spinnerItemTextColor" parent="android:TextAppearance.Widget.TextView.SpinnerItem">
+        <item name="android:textColor">@color/light_grey</item>
     </style>
 
 </resources>

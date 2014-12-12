@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dark_grey"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".TeamsActivity">
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true">
+
+        <LinearLayout
+            android:id="@+id/newsFeed"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/teamsHeading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/teams_title"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/light_grey"
+                android:textStyle="bold" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="Region"
+                android:id="@+id/teamsRegion"
+                android:background="@color/red"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:textColor="@color/white" />
+
+            <TableLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:stretchColumns="*"
+                android:id="@+id/teamsTable"  >
+
+                <TableRow>
+
+                    <TextView
+                        android:padding="10dp"
+                        android:background="@drawable/table_head_cell_shape"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="@color/red"
+                        android:textStyle="bold"
+                        android:id="@+id/teamsTableHeadRank"
+                        android:text="Rank"
+                        android:layout_marginRight="-4dp" />
+
+                    <TextView
+                        android:padding="10dp"
+                        android:background="@drawable/table_head_cell_shape"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="@color/red"
+                        android:textStyle="bold"
+                        android:id="@+id/teamsTableHeadName"
+                        android:text="Name"
+                        android:layout_marginRight="-4dp" />
+
+                    <TextView
+                        android:padding="10dp"
+                        android:background="@drawable/table_head_cell_shape"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="@color/red"
+                        android:textStyle="bold"
+                        android:id="@+id/teamsTableHeadPoints"
+                        android:text="Points" />
+
+                </TableRow>
+
+            </TableLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</RelativeLayout>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<TableRow xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:padding="5dp"
+        android:background="@drawable/table_cell_shape"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/light_grey"
+        android:id="@+id/teamsTableRowRank"
+        android:text="Rank"
+        android:layout_marginRight="-2dp" />
+
+    <TextView
+        android:padding="5dp"
+        android:background="@drawable/table_cell_shape"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/light_grey"
+        android:id="@+id/teamsTableRowName"
+        android:text="Name"
+        android:layout_marginRight="-2dp" />
+
+    <TextView
+        android:padding="5dp"
+        android:background="@drawable/table_cell_shape"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/light_grey"
+        android:id="@+id/teamsTableRowPoints"
+        android:text="Points" />
+
+</TableRow>

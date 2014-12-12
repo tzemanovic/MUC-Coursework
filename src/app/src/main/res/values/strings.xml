@@ -3,6 +3,11 @@
 
     <string name="app_name">Dota 2 Informer</string>
     <string name="news_title">NEWS</string>
-    <string name="action_settings">Settings</string>
+    <string name="preferences_title">PREFERENCES</string>
+    <string name="action_preferences">Preferences</string>
+    <string name="action_teams">Teams</string>
+    <string name="teams_title">TEAMS</string>
+    <string name="action_news">News</string>
+    <string name="action_quit">Quit</string>
 
 </resources>

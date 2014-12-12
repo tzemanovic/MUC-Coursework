@@ -4,10 +4,9 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.util.Pair;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,9 +15,6 @@ import com.tzemanovic.muccoursework.helper.FontLoader;
 import com.tzemanovic.muccoursework.rss.RSSItem;
 import com.tzemanovic.muccoursework.rss.RSSReader;
 
-import org.xml.sax.SAXException;
-
-import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.DateFormat;
@@ -27,10 +23,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import javax.xml.parsers.ParserConfigurationException;
 
-
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends BaseActivity {
 
     private LinearLayout newsFeed;
 
@@ -40,6 +34,7 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.setCurrentActionId(R.id.action_news);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -47,28 +42,7 @@ public class MainActivity extends ActionBarActivity {
 
         ((TextView) findViewById(R.id.newsHeading)).setTypeface(FontLoader.constantia(this));
 
-        AsyncRSSReader asyncRSSReader = new AsyncRSSReader();
-        asyncRSSReader.execute(NEWS_FEED_URL);
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
+        new AsyncRSSReader().execute(NEWS_FEED_URL);
     }
 
     private void showRssFeed(List<RSSItem> result) {
@@ -101,6 +75,7 @@ public class MainActivity extends ActionBarActivity {
             newsFeed.addView(rssItem);
         }
         findViewById(R.id.newsLoading).setVisibility(View.GONE);
+        findViewById(R.id.newsLoadingText).setVisibility(View.GONE);
     }
 
     private static String formatPubDate(String pubDate) {
@@ -117,16 +92,21 @@ public class MainActivity extends ActionBarActivity {
         }
     }
 
-    private class AsyncRSSReader extends AsyncTask<String, Void, List<RSSItem>> {
+    private void makeToast(String text) {
+        Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG);
+    }
+
+    private class AsyncRSSReader extends AsyncTask<String, Void, Pair<String, List<RSSItem>>> {
 
         @Override
-        protected List<RSSItem> doInBackground(String... strings) {
+        protected Pair<String, List<RSSItem>> doInBackground(String... strings) {
             URL url = null;
+            String error = null;
             try {
                 url = new URL(strings[0]);
             } catch (MalformedURLException e) {
                 e.printStackTrace();
-                Toast.makeText(getApplicationContext(), "Unable to obtain news data, malformed URL.", Toast.LENGTH_LONG);
+                error = "Unable to obtain news data, malformed URL.";
             }
 
             List<RSSItem> feed = null;
@@ -135,16 +115,19 @@ public class MainActivity extends ActionBarActivity {
                     feed = RSSReader.read(url);
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Toast.makeText(getApplicationContext(), "Unable to obtain news data.", Toast.LENGTH_LONG);
+                    error = "Unable to obtain news data.";
                 }
             }
-
-            return feed;
+            return Pair.create(error, feed);
         }
 
         @Override
-        protected void onPostExecute(List<RSSItem> result) {
-            showRssFeed(result);
+        protected void onPostExecute(Pair<String, List<RSSItem>> result) {
+            if (result.first == null) {
+                showRssFeed(result.second);
+            } else {
+                makeToast(result.first);
+            }
         }
     }
 
