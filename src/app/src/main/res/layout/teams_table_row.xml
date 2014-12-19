@@ -2,7 +2,9 @@
 
 <TableRow xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:clickable="true"
+    android:id="@+id/teamsTableRow">
 
     <TextView
         android:padding="5dp"
@@ -11,7 +13,7 @@
         android:textColor="@color/light_grey"
         android:id="@+id/teamsTableRowRank"
         android:text="Rank"
-        android:layout_marginRight="-2dp" />
+        android:layout_marginRight="-1px" />
 
     <TextView
         android:padding="5dp"
@@ -20,7 +22,7 @@
         android:textColor="@color/light_grey"
         android:id="@+id/teamsTableRowName"
         android:text="Name"
-        android:layout_marginRight="-2dp" />
+        android:layout_marginRight="-1px" />
 
     <TextView
         android:padding="5dp"

@@ -1,10 +1,12 @@
 package com.tzemanovic.muccoursework;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.tzemanovic.muccoursework.db.DBManager;
@@ -26,6 +28,7 @@ public class TeamsActivity extends BaseActivity {
         super.setCurrentActionId(R.id.action_teams);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teams);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
 
     @Override
@@ -36,13 +39,13 @@ public class TeamsActivity extends BaseActivity {
 
     private void prepareContent() {
         setContentView(R.layout.activity_teams);
-        DBManager dbManager = DBManager.getInstance(getApplicationContext());
+        DBManager dbManager = DBManager.getInstance(this);
 
         teamsTable = (TableLayout) findViewById(R.id.teamsTable);
 
         ((TextView) findViewById(R.id.teamsHeading)).setTypeface(FontLoader.constantia(this));
 
-        int region = Preferences.getInt(getApplicationContext(), Preferences.region);
+        int region = Preferences.getInt(this, Preferences.region);
         Button teamsRegion = (Button) findViewById(R.id.teamsRegion);
         teamsRegion.setText(dbManager.getRegionById(region));
         teamsRegion.setOnClickListener(new View.OnClickListener() {
@@ -65,12 +68,27 @@ public class TeamsActivity extends BaseActivity {
         showTeams(dbManager.readTeams());
     }
 
+    private void openTeamDetails(final TableTeam team) {
+        Intent intent = new Intent(this, PerformanceActivity.class);
+        intent.putExtra("teamId", team.getId());
+        intent.putExtra("teamName", team.getName());
+        startActivity(intent);
+    }
+
     private void showTeams(List<TableTeam> teams) {
-        int region = Preferences.getInt(getApplicationContext(), Preferences.region);
+        int region = Preferences.getInt(this, Preferences.region);
         int rankCount = 1;
         for (final TableTeam team : teams) {
             if (region == 0 || team.getRegionId() == region) {
-                View teamsTableRow = View.inflate(getApplicationContext(), R.layout.teams_table_row, null);
+                View teamsTableRow = View.inflate(this, R.layout.teams_table_row, null);
+
+                TableRow row = (TableRow) teamsTableRow.findViewById(R.id.teamsTableRow);
+                row.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        openTeamDetails(team);
+                    }
+                });
 
                 TextView rank = (TextView) teamsTableRow.findViewById(R.id.teamsTableRowRank);
                 rank.setText(String.valueOf(rankCount++));

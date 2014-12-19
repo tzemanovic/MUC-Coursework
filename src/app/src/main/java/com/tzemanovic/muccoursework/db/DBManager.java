@@ -63,6 +63,25 @@ public class DBManager {
         if (!cursor.isAfterLast()) {
             region = cursor.getString(0);
         }
+        cursor.close();
         return region;
+    }
+
+    public List<TableTeamResult> getResultsByTeamId(int teamId) {
+        Cursor cursor = db.rawQuery("SELECT _Id, Win, Loss, Year, Month FROM TeamResult WHERE TeamId = " + String.valueOf(teamId) + " ORDER BY Year, Month ASC", null);
+        List<TableTeamResult> results = new ArrayList<TableTeamResult>(cursor.getCount());
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            TableTeamResult result = new TableTeamResult();
+            result.setId(cursor.getInt(0));
+            result.setWin(cursor.getInt(1));
+            result.setLoss(cursor.getInt(2));
+            result.setYear(cursor.getInt(3));
+            result.setMonth(cursor.getInt(4));
+            results.add(result);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return results;
     }
 }

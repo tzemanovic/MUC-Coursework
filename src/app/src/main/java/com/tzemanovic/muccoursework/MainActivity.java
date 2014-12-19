@@ -1,6 +1,7 @@
 package com.tzemanovic.muccoursework;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -37,6 +38,7 @@ public class MainActivity extends BaseActivity {
         super.setCurrentActionId(R.id.action_news);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         newsFeed = (LinearLayout) findViewById(R.id.newsFeed);
 
@@ -47,7 +49,7 @@ public class MainActivity extends BaseActivity {
 
     private void showRssFeed(List<RSSItem> result) {
         for (final RSSItem item : result) {
-            View rssItem = View.inflate(getApplicationContext(), R.layout.rss_item, null);
+            View rssItem = View.inflate(this, R.layout.rss_item, null);
 
             TextView title = (TextView) rssItem.findViewById(R.id.rssItemTitle);
             title.setText(item.getTitle());
@@ -93,7 +95,7 @@ public class MainActivity extends BaseActivity {
     }
 
     private void makeToast(String text) {
-        Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG);
+        Toast.makeText(this, text, Toast.LENGTH_LONG);
     }
 
     private class AsyncRSSReader extends AsyncTask<String, Void, Pair<String, List<RSSItem>>> {

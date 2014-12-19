@@ -57,27 +57,27 @@
                 <TableRow>
 
                     <TextView
-                        android:padding="10dp"
+                        android:padding="5dp"
                         android:background="@drawable/table_head_cell_shape"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:textColor="@color/red"
                         android:textStyle="bold"
                         android:id="@+id/teamsTableHeadRank"
                         android:text="Rank"
-                        android:layout_marginRight="-4dp" />
+                        android:layout_marginRight="-2px" />
 
                     <TextView
-                        android:padding="10dp"
+                        android:padding="5dp"
                         android:background="@drawable/table_head_cell_shape"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:textColor="@color/red"
                         android:textStyle="bold"
                         android:id="@+id/teamsTableHeadName"
                         android:text="Name"
-                        android:layout_marginRight="-4dp" />
+                        android:layout_marginRight="-2px" />
 
                     <TextView
-                        android:padding="10dp"
+                        android:padding="5dp"
                         android:background="@drawable/table_head_cell_shape"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:textColor="@color/red"

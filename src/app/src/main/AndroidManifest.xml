@@ -23,6 +23,12 @@
             android:name=".TeamsActivity"
             android:label="Teams" >
         </activity>
+        <activity
+            android:name=".PerformanceActivity"
+            android:label="Performance"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden" >
+        </activity>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />

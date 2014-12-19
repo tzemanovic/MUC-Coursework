@@ -1,15 +1,10 @@
 package com.tzemanovic.muccoursework;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.res.Resources;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-
-import com.tzemanovic.muccoursework.helper.Preferences;
 
 /**
  * Created by Tomas Zemanovic on 11/12/2014.

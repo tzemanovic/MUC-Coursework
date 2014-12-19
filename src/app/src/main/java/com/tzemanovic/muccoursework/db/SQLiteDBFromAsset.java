@@ -29,6 +29,7 @@ public class SQLiteDBFromAsset extends SQLiteOpenHelper {
     private void copyDBFromAssetFile() {
         String dbPath = context.getDatabasePath(dbName).getAbsolutePath();
         try {
+            // comment out this condition to reload db file
             if (!new File(dbPath).exists()) {
                 this.getReadableDatabase();
 

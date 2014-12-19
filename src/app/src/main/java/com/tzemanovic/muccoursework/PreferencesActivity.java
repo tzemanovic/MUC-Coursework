@@ -2,6 +2,7 @@ package com.tzemanovic.muccoursework;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
@@ -30,9 +31,10 @@ public class PreferencesActivity extends BaseActivity {
         super.setCurrentActionId(R.id.action_preferences);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preferences);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        DBManager dbManager = DBManager.getInstance(getApplicationContext());
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        DBManager dbManager = DBManager.getInstance(this);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         ((TextView) findViewById(R.id.preferencesHeading)).setTypeface(FontLoader.constantia(this));
 
