@@ -26,22 +26,23 @@ public class SQLiteDBFromAsset extends SQLiteOpenHelper {
         copyDBFromAssetFile();
     }
 
+    // saves database from asset file into android database path
     private void copyDBFromAssetFile() {
         String dbPath = context.getDatabasePath(dbName).getAbsolutePath();
         try {
             // comment out this condition to reload db file
             if (!new File(dbPath).exists()) {
+                // pre-create a db
                 this.getReadableDatabase();
-
                 InputStream inputStream = context.getAssets().open(dbName);
                 OutputStream outputStream = new FileOutputStream(dbPath);
-
+                // copy asset date into db
                 byte[] buffer = new byte[1024];
                 int length;
                 while ((length = inputStream.read(buffer)) > 0) {
                     outputStream.write(buffer, 0, length);
                 }
-                //Close the streams
+                // close streams
                 outputStream.flush();
                 outputStream.close();
                 inputStream.close();

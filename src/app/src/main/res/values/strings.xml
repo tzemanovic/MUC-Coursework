@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Dota 2 Informer</string>
+    <string name="app_name">Dota 2 Brah</string>
     <string name="news_title">NEWS</string>
     <string name="preferences_title">PREFERENCES</string>
     <string name="action_preferences">Preferences</string>
@@ -9,5 +9,8 @@
     <string name="teams_title">TEAMS</string>
     <string name="action_news">News</string>
     <string name="action_quit">Quit</string>
+    <string name="tournaments_title">TOURNAMENTS</string>
+    <string name="action_tournaments">Tournaments</string>
+    <string name="action_about">About</string>
 
 </resources>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<TableRow xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="true"
+    android:id="@+id/tournamentsTableRow">
+
+    <TextView
+        android:padding="5dp"
+        android:background="@drawable/table_cell_shape"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/light_grey"
+        android:id="@+id/tournamentsTableRowStart"
+        android:text="Start"
+        android:layout_marginRight="-1px" />
+
+    <TextView
+        android:padding="5dp"
+        android:background="@drawable/table_cell_shape"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/light_grey"
+        android:id="@+id/tournamentsTableRowEnd"
+        android:text="End"
+        android:layout_marginRight="-1px" />
+
+    <TextView
+        android:padding="5dp"
+        android:background="@drawable/table_cell_shape"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/light_grey"
+        android:id="@+id/tournamentsTableRowName"
+        android:text="Name" />
+
+</TableRow>

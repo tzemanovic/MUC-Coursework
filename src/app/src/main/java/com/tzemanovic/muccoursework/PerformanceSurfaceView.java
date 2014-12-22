@@ -31,6 +31,7 @@ public class PerformanceSurfaceView extends SurfaceView implements SurfaceHolder
 
     @Override
     public void surfaceCreated(SurfaceHolder surfaceHolder) {
+        // start thread if it's not already running
         if (drawingThread.getState() == Thread.State.NEW)
         {
             drawingThread.start();
@@ -50,6 +51,7 @@ public class PerformanceSurfaceView extends SurfaceView implements SurfaceHolder
     private void stopDrawingThread() {
         boolean retry = true;
         drawingThread.interrupt();
+        // keep on trying to join thread
         while (retry) {
             try {
                 drawingThread.join();

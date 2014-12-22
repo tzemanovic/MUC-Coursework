@@ -5,6 +5,8 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="android:spinnerItemStyle">@style/spinnerItem</item>
+        <item name="actionBarStyle">@style/Widget.Styled.ActionBar</item>
+        <item name="android:actionBarStyle">@style/Widget.Styled.ActionBar</item>
     </style>
 
     <style name="spinnerItem" parent="android:Widget.TextView.SpinnerItem">
@@ -12,7 +14,12 @@
     </style>
 
     <style name="spinnerItemTextColor" parent="android:TextAppearance.Widget.TextView.SpinnerItem">
-        <item name="android:textColor">@color/light_grey</item>
+        <item name="android:textColor">@color/red</item>
+    </style>
+
+    <style name="Widget.Styled.ActionBar" parent="Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+        <item name="android:displayOptions">showHome|useLogo</item>
+        <item name="displayOptions">showHome|useLogo</item>
     </style>
 
 </resources>

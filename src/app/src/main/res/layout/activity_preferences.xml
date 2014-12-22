@@ -44,9 +44,6 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Region"
                 android:id="@+id/regionLabel"
-                android:layout_alignTop="@+id/scrollView"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
                 android:textColor="@color/light_grey"
                 android:layout_marginTop="15dp" />
 
@@ -54,6 +51,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/region"
+                android:layout_gravity="center_horizontal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Units"
+                android:id="@+id/unitsLabel"
+                android:textColor="@color/light_grey"
+                android:layout_marginTop="15dp" />
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/units"
                 android:layout_gravity="center_horizontal" />
 
             <LinearLayout

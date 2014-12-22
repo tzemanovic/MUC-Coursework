@@ -25,6 +25,7 @@ public class PreferencesActivity extends BaseActivity {
 
     SharedPreferences sharedPreferences;
     Spinner region;
+    Spinner units;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,13 +49,23 @@ public class PreferencesActivity extends BaseActivity {
             regionsAry[i++] = region.getName();
         }
         // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, regionsAry);
+        ArrayAdapter<String> regionAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, regionsAry);
         // Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        regionAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
-        region.setAdapter(adapter);
-        // load region from saved preferences
+        region.setAdapter(regionAdapter);
+        // try to load region from saved preferences
         region.setSelection(Preferences.getInt(sharedPreferences, Preferences.region));
+
+        units = (Spinner) findViewById(R.id.units);
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> unitsAdapter = ArrayAdapter.createFromResource(this, R.array.units_array, android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        unitsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        units.setAdapter(unitsAdapter);
+        // try to load units from saved preferences
+        units.setSelection(Preferences.getInt(sharedPreferences, Preferences.units));
 
         Button savePreferences = (Button) findViewById(R.id.savePreferences);
         savePreferences.setOnClickListener(new View.OnClickListener() {
@@ -82,6 +93,7 @@ public class PreferencesActivity extends BaseActivity {
     private void savePreferences() {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Preferences.putInt(editor, Preferences.region, region.getSelectedItemPosition());
+        Preferences.putInt(editor, Preferences.units, units.getSelectedItemPosition());
     }
 
 }

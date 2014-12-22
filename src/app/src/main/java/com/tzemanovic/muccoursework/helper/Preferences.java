@@ -13,6 +13,7 @@ import android.util.Pair;
  */
 public class Preferences {
     public static final Pair<String, Integer> region = Pair.create("region", 0);
+    public static final Pair<String, Integer> units = Pair.create("units", 0);
 
     public static int getInt(SharedPreferences sharedPreferences, Pair<String, Integer> keyAndDefVal) {
         return sharedPreferences.getInt(keyAndDefVal.first, keyAndDefVal.second);

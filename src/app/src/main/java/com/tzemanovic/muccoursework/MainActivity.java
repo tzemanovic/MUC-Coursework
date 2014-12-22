@@ -24,7 +24,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-
+/**
+ * Created by Tomas Zemanovic on 11/12/2014.
+ */
 public class MainActivity extends BaseActivity {
 
     private LinearLayout newsFeed;
@@ -41,9 +43,8 @@ public class MainActivity extends BaseActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         newsFeed = (LinearLayout) findViewById(R.id.newsFeed);
-
         ((TextView) findViewById(R.id.newsHeading)).setTypeface(FontLoader.constantia(this));
-
+        // read RSS feed in a new thread
         new AsyncRSSReader().execute(NEWS_FEED_URL);
     }
 
@@ -63,8 +64,8 @@ public class MainActivity extends BaseActivity {
                     .replace("Click here to read the full article.", "").replace("\n", "");
             TextView description = (TextView) rssItem.findViewById(R.id.rssItemDescription);
             description.setText(descriptionText);
-            //description.setTypeface(FontLoader.constantia(MainActivity.this));
 
+            // read more button opens the article in internet browser
             LinearLayout readMore = (LinearLayout) rssItem.findViewById(R.id.rssItemReadMore);
             readMore.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -76,6 +77,7 @@ public class MainActivity extends BaseActivity {
 
             newsFeed.addView(rssItem);
         }
+        // hide loading bar/text
         findViewById(R.id.newsLoading).setVisibility(View.GONE);
         findViewById(R.id.newsLoadingText).setVisibility(View.GONE);
     }
@@ -102,6 +104,7 @@ public class MainActivity extends BaseActivity {
 
         @Override
         protected Pair<String, List<RSSItem>> doInBackground(String... strings) {
+            // prepare URL from argument
             URL url = null;
             String error = null;
             try {
@@ -110,7 +113,7 @@ public class MainActivity extends BaseActivity {
                 e.printStackTrace();
                 error = "Unable to obtain news data, malformed URL.";
             }
-
+            // read RSS feed
             List<RSSItem> feed = null;
             if (url != null) {
                 try {
@@ -126,8 +129,10 @@ public class MainActivity extends BaseActivity {
         @Override
         protected void onPostExecute(Pair<String, List<RSSItem>> result) {
             if (result.first == null) {
+                // if there is no error
                 showRssFeed(result.second);
             } else {
+                // display error message
                 makeToast(result.first);
             }
         }

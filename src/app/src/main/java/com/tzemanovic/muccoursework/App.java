@@ -10,6 +10,7 @@ import java.util.List;
  */
 public class App {
 
+    // keeps references to all running activities
     private static List<Activity> activities;
 
     public static void addActivity(Activity activity) {
@@ -23,6 +24,7 @@ public class App {
         activities.remove(activity);
     }
 
+    // when user wants to quit app finish all running activities
     public static void quit()
     {
         for (Activity activity : activities) {

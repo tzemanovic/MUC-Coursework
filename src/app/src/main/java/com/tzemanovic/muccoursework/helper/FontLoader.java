@@ -1,6 +1,6 @@
 package com.tzemanovic.muccoursework.helper;
 
-import android.app.Activity;
+import android.content.Context;
 import android.graphics.Typeface;
 
 /**
@@ -10,9 +10,9 @@ public class FontLoader {
 
     private static Typeface constantiaFont;
 
-    public static Typeface constantia(Activity activity) {
+    public static Typeface constantia(Context context) {
         if (constantiaFont == null) {
-            constantiaFont = Typeface.createFromAsset(activity.getAssets(), "Constantia.ttf");
+            constantiaFont = Typeface.createFromAsset(context.getAssets(), "Constantia.ttf");
         }
         return constantiaFont;
     }

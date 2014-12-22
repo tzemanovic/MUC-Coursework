@@ -47,7 +47,7 @@ public class TeamsActivity extends BaseActivity {
 
         int region = Preferences.getInt(this, Preferences.region);
         Button teamsRegion = (Button) findViewById(R.id.teamsRegion);
-        teamsRegion.setText(dbManager.getRegionById(region));
+        teamsRegion.setText(dbManager.readRegionById(region));
         teamsRegion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -75,11 +75,13 @@ public class TeamsActivity extends BaseActivity {
         startActivity(intent);
     }
 
+    // populates table with data
     private void showTeams(List<TableTeam> teams) {
         int region = Preferences.getInt(this, Preferences.region);
         int rankCount = 1;
         for (final TableTeam team : teams) {
             if (region == 0 || team.getRegionId() == region) {
+                // build a row
                 View teamsTableRow = View.inflate(this, R.layout.teams_table_row, null);
 
                 TableRow row = (TableRow) teamsTableRow.findViewById(R.id.teamsTableRow);
@@ -92,16 +94,13 @@ public class TeamsActivity extends BaseActivity {
 
                 TextView rank = (TextView) teamsTableRow.findViewById(R.id.teamsTableRowRank);
                 rank.setText(String.valueOf(rankCount++));
-                //rank.setTypeface(FontLoader.constantia(this));
 
                 TextView name = (TextView) teamsTableRow.findViewById(R.id.teamsTableRowName);
                 name.setText(team.getName());
-                //name.setTypeface(FontLoader.constantia(this));
 
                 TextView points = (TextView) teamsTableRow.findViewById(R.id.teamsTableRowPoints);
                 points.setText(String.valueOf(team.getPoints()));
-                //points.setTypeface(FontLoader.constantia(this));
-
+                // add row to table
                 teamsTable.addView(teamsTableRow);
             }
         }

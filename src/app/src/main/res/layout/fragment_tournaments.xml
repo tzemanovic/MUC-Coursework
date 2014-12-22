@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/tournamentsLayout">
+
+    <TextView
+        android:id="@+id/tournamentsHeading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/tournaments_title"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/light_grey"
+        android:textStyle="bold" />
+
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:stretchColumns="*"
+        android:id="@+id/tournamentsTable">
+
+        <TableRow>
+
+            <TextView
+                android:padding="5dp"
+                android:background="@drawable/table_head_cell_shape"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/red"
+                android:textStyle="bold"
+                android:id="@+id/tournamentsTableHeadStart"
+                android:text="Start"
+                android:layout_marginRight="-2px" />
+
+            <TextView
+                android:padding="5dp"
+                android:background="@drawable/table_head_cell_shape"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/red"
+                android:textStyle="bold"
+                android:id="@+id/tournamentsTableHeadEnd"
+                android:text="End"
+                android:layout_marginRight="-2px" />
+
+            <TextView
+                android:padding="5dp"
+                android:background="@drawable/table_head_cell_shape"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/red"
+                android:textStyle="bold"
+                android:id="@+id/tournamentsTableHeadName"
+                android:text="Name" />
+
+        </TableRow>
+
+    </TableLayout>
+
+    <TextView
+        android:id="@+id/noTournaments"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="No Tournaments"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/red"
+        android:textStyle="bold" />
+
+</LinearLayout>

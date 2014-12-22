@@ -1,5 +1,6 @@
 package com.tzemanovic.muccoursework;
 
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -9,6 +10,7 @@ import android.view.MenuItem;
 /**
  * Created by Tomas Zemanovic on 11/12/2014.
  */
+// base class to activities
 public class BaseActivity extends ActionBarActivity {
 
     private int currentActionId;
@@ -29,6 +31,7 @@ public class BaseActivity extends ActionBarActivity {
         int size = menu.size();
         for (int i = 0; i < size; ++i) {
             MenuItem mi = menu.getItem(i);
+            // hide item linking to current activity
             if (mi.getItemId() == currentActionId) {
                 mi.setVisible(false);
             } else {
@@ -54,9 +57,19 @@ public class BaseActivity extends ActionBarActivity {
                 startActivity(intent);
                 return true;
             }
+            case R.id.action_tournaments: {
+                Intent intent = new Intent(this, TournamentsActivity.class);
+                startActivity(intent);
+                return true;
+            }
             case R.id.action_preferences: {
                 Intent intent = new Intent(this, PreferencesActivity.class);
                 startActivity(intent);
+                return true;
+            }
+            case R.id.action_about: {
+                DialogFragment about = new AboutDialog();
+                about.show(getFragmentManager(), "AboutDialog");
                 return true;
             }
             case R.id.action_quit: {

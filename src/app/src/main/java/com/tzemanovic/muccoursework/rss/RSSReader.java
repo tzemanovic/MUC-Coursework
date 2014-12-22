@@ -22,9 +22,10 @@ import javax.xml.parsers.SAXParserFactory;
 public class RSSReader {
 
     public static List<RSSItem> read(URL url) throws IOException, ParserConfigurationException, SAXException {
+        // request url
         InputStream inputStream = url.openStream();
         InputSource inputSource = new InputSource(inputStream);
-
+        // parse the response
         SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
         SAXParser saxParser = saxParserFactory.newSAXParser();
         XMLReader xmlReader = saxParser.getXMLReader();
@@ -65,6 +66,7 @@ public class RSSReader {
 
         @Override
         public void endElement(String uri, String localName, String qName) {
+            // parse RSS feed
             if(qName.equals("item")) {
                 feed.add(currentRSSItem);
             } else if(currentRSSItem != null) {

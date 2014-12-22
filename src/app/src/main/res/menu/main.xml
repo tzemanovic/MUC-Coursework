@@ -15,8 +15,18 @@
         android:orderInCategory="1"
         app:showAsAction="always" />
 
+    <item android:id="@+id/action_tournaments"
+        android:title="@string/action_tournaments"
+        android:orderInCategory="1"
+        app:showAsAction="always" />
+
     <item android:id="@+id/action_preferences"
         android:title="@string/action_preferences"
+        android:orderInCategory="10"
+        app:showAsAction="ifRoom" />
+
+    <item android:id="@+id/action_about"
+        android:title="@string/action_about"
         android:orderInCategory="10"
         app:showAsAction="ifRoom" />
 

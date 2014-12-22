@@ -1,10 +1,8 @@
 package com.tzemanovic.muccoursework;
 
-import android.app.ActionBar;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.SurfaceView;
-import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -28,14 +26,15 @@ public class PerformanceActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_performance);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        // get team details from intent extras
         int teamId = getIntent().getIntExtra("teamId", 0);
         String teamName = getIntent().getStringExtra("teamName");
-
+        // set title text
         TextView heading = (TextView) findViewById(R.id.performanceHeading);
         heading.setTypeface(FontLoader.constantia(this));
         heading.setText(teamName.toUpperCase() + " WIN/LOSS RATIO");
-
-        results = DBManager.getInstance(this).getResultsByTeamId(teamId);
+        // read results for a team
+        results = DBManager.getInstance(this).readResultsByTeamId(teamId);
         layout = (LinearLayout) findViewById(R.id.performanceLayout);
         openPerformanceGraph();
     }
